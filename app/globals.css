@@ -2,128 +2,199 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* Custom CSS Variables */
+:root {
+  --primary: #2c3e50;
+  --primary-light: #34495e;
+  --accent: #e67e22;
+  --accent-light: #f39c12;
+  --background: #ffffff;
+  --foreground: #2c3e50;
+  --muted: #95a5a6;
+  --muted-foreground: #7f8c8d;
+  --border: #ecf0f1;
+  --input: #ffffff;
+  --ring: #e67e22;
+  --radius: 12px; /* Increased base radius for rounded edges */
+}
+
+@media (prefers-color-scheme: dark) {
   :root {
-    /* Updated color palette inspired by the design */
-    --background: 0 0% 100%;
-    --foreground: 184 87% 9%;
-    --card: 0 0% 100%;
-    --card-foreground: 184 87% 9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 184 87% 9%;
-    --primary: 184 87% 9%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 195 32% 86%;
-    --secondary-foreground: 184 87% 9%;
-    --muted: 195 32% 86%;
-    --muted-foreground: 184 45% 45%;
-    --accent: 187 84% 29%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 195 32% 86%;
-    --input: 195 32% 86%;
-    --ring: 187 84% 29%;
-    --radius: 0.5rem;
-    --chart-1: 187 84% 29%;
-    --chart-2: 195 32% 86%;
-    --chart-3: 184 87% 9%;
-    --chart-4: 210 40% 98%;
-    --chart-5: 0 0% 100%;
-  }
-
-  .dark {
-    --background: 184 87% 9%;
-    --foreground: 210 40% 98%;
-    --card: 184 87% 9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 184 87% 9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 184 87% 9%;
-    --secondary: 195 32% 86%;
-    --secondary-foreground: 184 87% 9%;
-    --muted: 195 32% 86%;
-    --muted-foreground: 184 45% 45%;
-    --accent: 187 84% 29%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 195 32% 86%;
-    --input: 195 32% 86%;
-    --ring: 187 84% 29%;
-    --chart-1: 187 84% 29%;
-    --chart-2: 195 32% 86%;
-    --chart-3: 184 87% 9%;
-    --chart-4: 210 40% 98%;
-    --chart-5: 0 0% 100%;
+    --primary: #ecf0f1;
+    --primary-light: #bdc3c7;
+    --accent: #f39c12;
+    --accent-light: #e67e22;
+    --background: #2c3e50;
+    --foreground: #ecf0f1;
+    --muted: #7f8c8d;
+    --muted-foreground: #95a5a6;
+    --border: #34495e;
+    --input: #34495e;
+    --ring: #f39c12;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground font-light;
-  }
+/* Base Styles */
+* {
+  border-color: hsl(var(--border));
 }
 
-@layer components {
-  .container-width {
-    @apply max-w-7xl mx-auto;
-  }
-  
-  .section-padding {
-    @apply px-6 lg:px-8;
-  }
-  
-  .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-none text-base font-normal uppercase tracking-widest transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg;
-  }
-  
-  .btn-secondary {
-    @apply bg-transparent text-primary hover:bg-primary hover:text-primary-foreground px-8 py-4 rounded-none text-base font-normal uppercase tracking-widest transition-all duration-300 border-2 border-primary;
-  }
-  
-  .input-field {
-    @apply w-full px-6 py-4 border-2 border-muted rounded-none text-base bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-0 focus:border-primary transition-all duration-300;
-  }
-  
-  .feature-item {
-    @apply flex items-center gap-3 text-foreground/80 text-base font-light;
-  }
-  
-  .feature-icon {
-    @apply w-5 h-5 text-accent flex-shrink-0;
-  }
-  
-  .hero-text {
-    @apply text-4xl md:text-6xl lg:text-7xl font-light leading-tight tracking-wide;
-  }
-  
-  .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-primary;
-  }
-  
-  .animate-delay-200 {
-    animation-delay: 200ms;
-  }
-  
-  .animate-delay-400 {
-    animation-delay: 400ms;
-  }
-  
-  .animate-delay-600 {
-    animation-delay: 600ms;
-  }
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
 }
 
-/* Modern animations */
-@keyframes slideInUp {
+/* Typography Scale */
+.text-heading {
+  @apply text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-tight;
+}
+
+.section-title {
+  @apply text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-tight;
+}
+
+.text-body {
+  @apply text-lg leading-relaxed;
+}
+
+.text-caption {
+  @apply text-sm tracking-wide uppercase font-medium;
+}
+
+/* Layout Components */
+.container-width {
+  @apply max-w-7xl mx-auto;
+}
+
+.section-padding {
+  @apply px-6 lg:px-8;
+}
+
+/* Button Components with Rounded Edges */
+.btn-primary {
+  @apply bg-accent hover:bg-accent-light text-white px-8 py-4 
+         font-medium tracking-wide transition-all duration-300 
+         hover:scale-105 hover:shadow-xl rounded-xl; /* Added rounded-xl for more rounded buttons */
+}
+
+.btn-secondary {
+  @apply border-2 border-primary text-primary hover:bg-primary 
+         hover:text-white px-8 py-4 font-medium tracking-wide 
+         transition-all duration-300 hover:scale-105 
+         rounded-xl; /* Added rounded-xl */
+}
+
+.btn-ghost {
+  @apply text-primary hover:text-accent px-8 py-4 
+         font-medium tracking-wide transition-all duration-300
+         rounded-xl; /* Added rounded-xl */
+}
+
+/* Form Components with Rounded Edges */
+.input-field {
+  @apply w-full px-4 py-4 border-2 border-muted/20 
+         focus:border-accent focus:ring-2 focus:ring-accent/20 
+         text-foreground bg-input placeholder:text-muted-foreground 
+         transition-all duration-200 outline-none
+         rounded-xl; /* Added rounded-xl for input fields */
+}
+
+/* Card Components with Rounded Edges */
+.card {
+  @apply bg-white shadow-lg hover:shadow-2xl transition-all duration-300 
+         border border-muted/10
+         rounded-2xl; /* Added rounded-2xl for cards */
+}
+
+.card-content {
+  @apply p-8 rounded-2xl; /* Added rounded-2xl */
+}
+
+/* Image Components with Rounded Edges */
+.hero-image {
+  @apply w-full h-full object-cover 
+         rounded-2xl; /* Added rounded-2xl for hero images */
+}
+
+.story-image {
+  @apply w-full h-auto object-cover shadow-2xl
+         rounded-2xl; /* Added rounded-2xl for story images */
+}
+
+.brand-logo {
+  @apply h-12 w-auto object-contain
+         rounded-lg; /* Added rounded-lg for logos */
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--primary);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+
+.text-foreground {
+  color: var(--foreground);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.bg-accent-light {
+  background-color: var(--accent-light);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+.border-primary {
+  border-color: var(--primary);
+}
+
+.border-muted {
+  border-color: var(--muted);
+}
+
+/* Animation Classes */
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animate-delay-600 {
+  animation-delay: 600ms;
+}
+
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -131,68 +202,170 @@
   }
 }
 
-@keyframes fadeInScale {
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
 }
 
-.animate-slide-up {
-  animation: slideInUp 0.8s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fadeInScale 0.8s ease-out forwards;
-}
-
-/* Custom prose styles */
+/* Prose Styling for Rich Text with Rounded Elements */
 .prose {
-  @apply text-foreground/80 font-light leading-relaxed;
+  @apply text-foreground;
 }
 
 .prose h1,
 .prose h2,
 .prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  @apply text-primary font-light;
+.prose h4 {
+  @apply text-primary font-light tracking-tight;
+}
+
+.prose p {
+  @apply text-foreground/80 leading-relaxed;
 }
 
 .prose strong {
-  @apply text-primary font-medium;
+  @apply text-accent font-semibold;
 }
 
 .prose em {
-  @apply text-primary/80;
+  @apply text-accent italic;
 }
 
-.prose a {
-  @apply text-accent hover:text-accent/80 transition-colors;
+.prose blockquote {
+  @apply border-l-4 border-accent bg-accent/5 pl-6 py-4 italic
+         rounded-r-xl; /* Added rounded corner to blockquotes */
 }
 
-/* Typography hierarchy */
-.text-display {
-  @apply text-6xl md:text-8xl font-light tracking-wider;
+.prose code {
+  @apply bg-muted/20 px-2 py-1 text-sm font-mono
+         rounded-md; /* Added rounded corners to inline code */
 }
 
-.text-heading {
-  @apply text-3xl md:text-5xl font-light tracking-wide;
+.prose pre {
+  @apply bg-primary text-white p-6 overflow-x-auto
+         rounded-xl; /* Added rounded-xl to code blocks */
 }
 
-.text-subheading {
-  @apply text-xl md:text-2xl font-light tracking-wide;
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+  .text-heading {
+    @apply text-3xl md:text-4xl;
+  }
+  
+  .section-title {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  .container-width {
+    @apply px-4;
+  }
+  
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    @apply px-6 py-3 text-sm;
+  }
+  
+  .card-content {
+    @apply p-6;
+  }
 }
 
-.text-body {
-  @apply text-base font-light leading-relaxed;
+/* Enhanced Shadow Classes for Rounded Elements */
+.shadow-soft {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-.text-caption {
-  @apply text-sm font-light tracking-wide uppercase;
+.shadow-medium {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-strong {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
+}
+
+/* Hover Effects for Rounded Elements */
+.hover-lift {
+  @apply transition-all duration-300 hover:scale-105 hover:shadow-strong;
+}
+
+.hover-glow {
+  @apply transition-all duration-300;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(230, 126, 34, 0.3);
+}
+
+/* Focus States for Accessibility */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
+}
+
+/* Custom Scrollbar with Rounded Edges */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted/10 rounded-full; /* Rounded scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted/40 rounded-full; /* Rounded scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted/60;
+}
+
+/* Enhanced Checkbox and Radio Button Styling */
+input[type="checkbox"],
+input[type="radio"] {
+  @apply w-4 h-4 border-2 border-muted focus:ring-accent focus:ring-2
+         rounded-md; /* Rounded checkboxes */
+}
+
+input[type="radio"] {
+  @apply rounded-full; /* Radio buttons remain circular */
+}
+
+/* Selection Styling */
+::selection {
+  @apply bg-accent/20 text-accent;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  @apply w-4 h-4 border-2 border-white border-t-transparent animate-spin
+         rounded-full; /* Rounded loading spinner */
+}
+
+/* Error and Success Messages */
+.alert {
+  @apply p-4 border-l-4 flex items-center gap-3
+         rounded-r-xl; /* Rounded alert boxes */
+}
+
+.alert-error {
+  @apply bg-red-50 border-red-400 text-red-700;
+}
+
+.alert-success {
+  @apply bg-green-50 border-green-400 text-green-700;
+}
+
+.alert-warning {
+  @apply bg-yellow-50 border-yellow-400 text-yellow-700;
+}
+
+.alert-info {
+  @apply bg-blue-50 border-blue-400 text-blue-700;
 }
