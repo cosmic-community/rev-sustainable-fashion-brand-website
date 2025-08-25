@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Mail, Check, AlertCircle } from 'lucide-react'
+import { Mail, Check, AlertCircle, ArrowRight } from 'lucide-react'
 import { LandingPage, EmailSignupForm, InterestOption } from '@/types'
 
 interface EmailSignupProps {
@@ -62,12 +62,12 @@ export default function EmailSignup({ landingPage }: EmailSignupProps) {
 
   if (isSuccess) {
     return (
-      <section className="py-20 bg-white">
+      <section id="email-signup" className="py-24 bg-gradient-to-br from-accent/5 to-primary/5">
         <div className="container-width section-padding">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="animate-fade-in">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Check className="w-8 h-8 text-green-600" />
+            <div className="animate-fade-in space-y-8">
+              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto">
+                <Check className="w-10 h-10 text-white" />
               </div>
               
               {metadata?.success_message ? (
@@ -76,10 +76,11 @@ export default function EmailSignup({ landingPage }: EmailSignupProps) {
                   dangerouslySetInnerHTML={{ __html: metadata.success_message }}
                 />
               ) : (
-                <div>
-                  <h3 className="text-2xl font-bold mb-4">Thank You!</h3>
-                  <p className="text-gray-600">
-                    You've been successfully added to our launch notification list.
+                <div className="space-y-4">
+                  <h3 className="text-heading text-primary">Welcome to the journey</h3>
+                  <p className="text-body text-foreground/70 max-w-lg mx-auto">
+                    You've been successfully added to our launch notification list. 
+                    Get ready for sustainable fashion that makes a difference.
                   </p>
                 </div>
               )}
@@ -91,95 +92,130 @@ export default function EmailSignup({ landingPage }: EmailSignupProps) {
   }
 
   return (
-    <section className="py-20 bg-white">
+    <section id="email-signup" className="py-24 bg-gradient-to-br from-accent/5 to-primary/5">
       <div className="container-width section-padding">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="animate-fade-in">
-            {/* Signup Title */}
-            {metadata?.signup_title && (
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">
-                {metadata.signup_title}
-              </h2>
-            )}
-
-            {/* Signup Description */}
-            {metadata?.signup_description && (
-              <div 
-                className="prose prose-lg max-w-none text-gray-700 mb-10"
-                dangerouslySetInnerHTML={{ __html: metadata.signup_description }}
-              />
-            )}
-
-            {/* Error Message */}
-            {error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3 text-red-700">
-                <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            {/* Email Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* Email Input */}
-              <div>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="email"
-                    placeholder={metadata?.email_placeholder || 'Enter your email address'}
-                    {...register('email', {
-                      required: 'Email is required',
-                      pattern: {
-                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                        message: 'Please enter a valid email address'
-                      }
-                    })}
-                    className="input-field pl-12"
-                    disabled={isSubmitting}
-                  />
+        <div className="max-w-4xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left Column - Content */}
+            <div className="space-y-8 animate-slide-up">
+              {metadata?.signup_title && (
+                <div>
+                  <p className="text-caption text-accent mb-4">Join the Movement</p>
+                  <h2 className="section-title text-primary">
+                    {metadata.signup_title}
+                  </h2>
                 </div>
-                {errors.email && (
-                  <p className="mt-2 text-sm text-red-600 text-left">{errors.email.message}</p>
-                )}
-              </div>
+              )}
 
-              {/* Interests */}
-              <div className="text-left">
-                <label className="block text-sm font-medium text-gray-700 mb-3">
-                  What interests you? (Optional)
-                </label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {interestOptions.map((interest) => (
-                    <label key={interest} className="flex items-center space-x-2 cursor-pointer">
+              {metadata?.signup_description && (
+                <div 
+                  className="prose prose-lg max-w-none text-foreground/80"
+                  dangerouslySetInnerHTML={{ __html: metadata.signup_description }}
+                />
+              )}
+
+              {/* Stats or Features */}
+              <div className="grid grid-cols-3 gap-8 pt-8">
+                <div className="text-center">
+                  <div className="text-2xl font-light text-primary">100%</div>
+                  <div className="text-caption text-muted-foreground">Sustainable</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-light text-primary">24h</div>
+                  <div className="text-caption text-muted-foreground">Early Access</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-light text-primary">0%</div>
+                  <div className="text-caption text-muted-foreground">Spam</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Form */}
+            <div className="animate-fade-in animate-delay-400">
+              <div className="bg-white p-8 shadow-2xl rounded-none">
+                
+                {/* Error Message */}
+                {error && (
+                  <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-400 flex items-center gap-3 text-red-700">
+                    <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">{error}</span>
+                  </div>
+                )}
+
+                {/* Email Form */}
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                  {/* Email Input */}
+                  <div>
+                    <label className="block text-caption text-muted-foreground mb-3">
+                      Email Address
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                       <input
-                        type="checkbox"
-                        value={interest}
-                        {...register('interests')}
-                        className="rounded border-gray-300 text-primary focus:ring-primary"
+                        type="email"
+                        placeholder={metadata?.email_placeholder || 'your@email.com'}
+                        {...register('email', {
+                          required: 'Email is required',
+                          pattern: {
+                            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                            message: 'Please enter a valid email address'
+                          }
+                        })}
+                        className="input-field pl-12"
                         disabled={isSubmitting}
                       />
-                      <span className="text-sm text-gray-700">{interest}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+                    </div>
+                    {errors.email && (
+                      <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>
+                    )}
+                  </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn-primary w-full sm:w-auto"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Subscribing...
-                  </span>
-                ) : (
-                  metadata?.submit_button_text || 'Notify Me at Launch'
-                )}
-              </button>
-            </form>
+                  {/* Interests */}
+                  <div>
+                    <label className="block text-caption text-muted-foreground mb-4">
+                      What interests you? (Optional)
+                    </label>
+                    <div className="space-y-3">
+                      {interestOptions.map((interest) => (
+                        <label key={interest} className="flex items-center space-x-3 cursor-pointer group">
+                          <input
+                            type="checkbox"
+                            value={interest}
+                            {...register('interests')}
+                            className="w-4 h-4 border-2 border-muted rounded-none text-accent focus:ring-accent"
+                            disabled={isSubmitting}
+                          />
+                          <span className="text-sm text-foreground group-hover:text-accent transition-colors">
+                            {interest}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary w-full group flex items-center justify-center gap-3"
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Processing...
+                      </span>
+                    ) : (
+                      <>
+                        {metadata?.submit_button_text || 'Join the Launch'}
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
