@@ -2,226 +2,172 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS Variables */
-:root {
-  --primary: #2c3e50;
-  --primary-light: #34495e;
-  --accent: #e67e22;
-  --accent-light: #f39c12;
-  --background: #ffffff;
-  --foreground: #2c3e50;
-  --muted: #95a5a6;
-  --muted-foreground: #7f8c8d;
-  --border: #ecf0f1;
-  --input: #ffffff;
-  --ring: #e67e22;
-  --radius: 12px; /* Increased base radius for rounded edges */
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --primary: #ecf0f1;
-    --primary-light: #bdc3c7;
-    --accent: #f39c12;
-    --accent-light: #e67e22;
-    --background: #2c3e50;
-    --foreground: #ecf0f1;
-    --muted: #7f8c8d;
-    --muted-foreground: #95a5a6;
-    --border: #34495e;
-    --input: #34495e;
-    --ring: #f39c12;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
 
-/* Base Styles */
-* {
-  border-color: hsl(var(--border));
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-feature-settings: "rlig" 1, "calt" 1;
-  line-height: 1.7;
-  letter-spacing: -0.01em;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 /* Typography Scale */
-.text-heading {
-  @apply text-4xl md:text-5xl lg:text-6xl font-light tracking-tight leading-tight;
-}
-
-.section-title {
-  @apply text-3xl md:text-4xl lg:text-5xl font-light tracking-tight leading-tight;
-}
-
-.text-body {
-  @apply text-lg leading-relaxed;
-}
-
-.text-caption {
-  @apply text-sm tracking-wide uppercase font-medium;
-}
-
-/* Layout Components */
-.container-width {
-  @apply max-w-7xl mx-auto;
-}
-
-.section-padding {
-  @apply px-6 lg:px-8;
-}
-
-/* Button Components with Rounded Edges */
-.btn-primary {
-  @apply bg-accent hover:bg-accent-light text-white px-8 py-4 
-         font-medium tracking-wide transition-all duration-300 
-         hover:scale-105 hover:shadow-xl rounded-xl; /* Added rounded-xl for more rounded buttons */
-}
-
-.btn-secondary {
-  @apply border-2 border-primary text-primary hover:bg-primary 
-         hover:text-white px-8 py-4 font-medium tracking-wide 
-         transition-all duration-300 hover:scale-105 
-         rounded-xl; /* Added rounded-xl */
-}
-
-.btn-ghost {
-  @apply text-primary hover:text-accent px-8 py-4 
-         font-medium tracking-wide transition-all duration-300
-         rounded-xl; /* Added rounded-xl */
-}
-
-/* Form Components with Rounded Edges */
-.input-field {
-  @apply w-full px-4 py-4 border-2 border-muted/20 
-         focus:border-accent focus:ring-2 focus:ring-accent/20 
-         text-foreground bg-input placeholder:text-muted-foreground 
-         transition-all duration-200 outline-none
-         rounded-xl; /* Added rounded-xl for input fields */
-}
-
-/* Card Components with Rounded Edges */
-.card {
-  @apply bg-white shadow-lg hover:shadow-2xl transition-all duration-300 
-         border border-muted/10
-         rounded-2xl; /* Added rounded-2xl for cards */
-}
-
-.card-content {
-  @apply p-8 rounded-2xl; /* Added rounded-2xl */
-}
-
-/* Image Components with Rounded Edges */
-.hero-image {
-  @apply w-full h-full object-cover 
-         rounded-2xl; /* Added rounded-2xl for hero images */
-}
-
-.story-image {
-  @apply w-full h-auto object-cover shadow-2xl
-         rounded-2xl; /* Added rounded-2xl for story images */
-}
-
-.brand-logo {
-  @apply h-12 w-auto object-contain
-         rounded-lg; /* Added rounded-lg for logos */
-}
-
-/* Utility Classes */
-.text-primary {
-  color: var(--primary);
-}
-
-.text-accent {
-  color: var(--accent);
-}
-
-.text-muted-foreground {
-  color: var(--muted-foreground);
-}
-
-.text-foreground {
-  color: var(--foreground);
-}
-
-.bg-accent {
-  background-color: var(--accent);
-}
-
-.bg-accent-light {
-  background-color: var(--accent-light);
-}
-
-.bg-primary {
-  background-color: var(--primary);
-}
-
-.border-accent {
-  border-color: var(--accent);
-}
-
-.border-primary {
-  border-color: var(--primary);
-}
-
-.border-muted {
-  border-color: var(--muted);
-}
-
-/* Animation Classes */
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.8s ease-out;
-}
-
-.animate-delay-200 {
-  animation-delay: 200ms;
-}
-
-.animate-delay-400 {
-  animation-delay: 400ms;
-}
-
-.animate-delay-600 {
-  animation-delay: 600ms;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@layer utilities {
+  .section-title {
+    @apply text-heading font-light tracking-tight;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .display-title {
+    @apply text-display font-extralight tracking-tight;
+  }
+  
+  .container-width {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .section-padding {
+    @apply px-6 lg:px-8;
   }
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
+/* Component Styles */
+@layer components {
+  /* Button Components */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground 
+           hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 
+           transition-all duration-300 font-medium text-sm tracking-wide uppercase;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-secondary text-secondary-foreground
+           hover:bg-secondary/80 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2
+           transition-all duration-300 font-medium text-sm tracking-wide uppercase;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary
+           hover:bg-primary hover:text-primary-foreground focus:outline-none focus:ring-2 
+           focus:ring-primary focus:ring-offset-2 transition-all duration-300 font-medium 
+           text-sm tracking-wide uppercase;
+  }
+
+  /* Form Components with Rounded Edges */
+  .input-field {
+    @apply w-full px-4 py-4 border-2 border-muted/20 
+           focus:border-accent focus:ring-2 focus:ring-accent/20 
+           text-foreground bg-input placeholder:text-muted-foreground
+           transition-all duration-300 outline-none;
+  }
+
+  .textarea-field {
+    @apply w-full px-4 py-4 border-2 border-muted/20 
+           focus:border-accent focus:ring-2 focus:ring-accent/20 
+           text-foreground bg-input placeholder:text-muted-foreground
+           transition-all duration-300 outline-none resize-none min-h-[120px];
+  }
+
+  /* Layout Components */
+  .hero-gradient {
+    @apply bg-gradient-to-br from-background via-background to-accent/5;
+  }
+
+  .section-gradient {
+    @apply bg-gradient-to-r from-background via-accent/5 to-background;
   }
 }
 
-/* Prose Styling for Rich Text with Rounded Elements */
+/* Animation Utilities */
+@layer utilities {
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  .animate-delay-600 {
+    animation-delay: 0.6s;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--accent));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent-foreground));
+}
+
+/* Prose styles for rich text content */
 .prose {
-  @apply text-foreground;
+  @apply max-w-none;
 }
 
 .prose h1,
 .prose h2,
 .prose h3,
-.prose h4 {
+.prose h4,
+.prose h5,
+.prose h6 {
   @apply text-primary font-light tracking-tight;
 }
 
@@ -230,142 +176,22 @@ body {
 }
 
 .prose strong {
-  @apply text-accent font-semibold;
+  @apply text-primary font-semibold;
 }
 
 .prose em {
   @apply text-accent italic;
 }
 
-.prose blockquote {
-  @apply border-l-4 border-accent bg-accent/5 pl-6 py-4 italic
-         rounded-r-xl; /* Added rounded corner to blockquotes */
+.prose a {
+  @apply text-accent hover:text-accent/80 underline underline-offset-4 transition-colors;
 }
 
-.prose code {
-  @apply bg-muted/20 px-2 py-1 text-sm font-mono
-         rounded-md; /* Added rounded corners to inline code */
+.prose ul,
+.prose ol {
+  @apply text-foreground/80;
 }
 
-.prose pre {
-  @apply bg-primary text-white p-6 overflow-x-auto
-         rounded-xl; /* Added rounded-xl to code blocks */
-}
-
-/* Responsive Design Adjustments */
-@media (max-width: 768px) {
-  .text-heading {
-    @apply text-3xl md:text-4xl;
-  }
-  
-  .section-title {
-    @apply text-2xl md:text-3xl;
-  }
-  
-  .container-width {
-    @apply px-4;
-  }
-  
-  .btn-primary,
-  .btn-secondary,
-  .btn-ghost {
-    @apply px-6 py-3 text-sm;
-  }
-  
-  .card-content {
-    @apply p-6;
-  }
-}
-
-/* Enhanced Shadow Classes for Rounded Elements */
-.shadow-soft {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.shadow-medium {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-.shadow-strong {
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
-}
-
-/* Hover Effects for Rounded Elements */
-.hover-lift {
-  @apply transition-all duration-300 hover:scale-105 hover:shadow-strong;
-}
-
-.hover-glow {
-  @apply transition-all duration-300;
-}
-
-.hover-glow:hover {
-  box-shadow: 0 0 30px rgba(230, 126, 34, 0.3);
-}
-
-/* Focus States for Accessibility */
-.focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background;
-}
-
-/* Custom Scrollbar with Rounded Edges */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-muted/10 rounded-full; /* Rounded scrollbar track */
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-muted/40 rounded-full; /* Rounded scrollbar thumb */
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-muted/60;
-}
-
-/* Enhanced Checkbox and Radio Button Styling */
-input[type="checkbox"],
-input[type="radio"] {
-  @apply w-4 h-4 border-2 border-muted focus:ring-accent focus:ring-2
-         rounded-md; /* Rounded checkboxes */
-}
-
-input[type="radio"] {
-  @apply rounded-full; /* Radio buttons remain circular */
-}
-
-/* Selection Styling */
-::selection {
-  @apply bg-accent/20 text-accent;
-}
-
-/* Loading Spinner */
-.loading-spinner {
-  @apply w-4 h-4 border-2 border-white border-t-transparent animate-spin
-         rounded-full; /* Rounded loading spinner */
-}
-
-/* Error and Success Messages */
-.alert {
-  @apply p-4 border-l-4 flex items-center gap-3
-         rounded-r-xl; /* Rounded alert boxes */
-}
-
-.alert-error {
-  @apply bg-red-50 border-red-400 text-red-700;
-}
-
-.alert-success {
-  @apply bg-green-50 border-green-400 text-green-700;
-}
-
-.alert-warning {
-  @apply bg-yellow-50 border-yellow-400 text-yellow-700;
-}
-
-.alert-info {
-  @apply bg-blue-50 border-blue-400 text-blue-700;
+.prose li {
+  @apply mb-2;
 }
